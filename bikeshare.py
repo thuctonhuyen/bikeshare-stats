@@ -19,6 +19,7 @@ VALIDATORS_MESSAGE = {
 }
 TRIP_DURATION_ASTYPE = 'timedelta64[m]'
 TRIP_DURATION_TIME_UNIT = 'mins'
+PAGE_SIZE = 5
 
 def convert_month(month):
     try:
@@ -254,6 +255,24 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
+def handle_display_raw_data(df):
+    try:
+        is_continue = True
+        start = 0
+        end = PAGE_SIZE
+        prompt = f"Would you like to see {PAGE_SIZE} lines of raw data? Enter 'yes' or 'not': "
+        while is_continue:
+            display_raw_data = input(prompt)
+            
+            if display_raw_data == 'yes':
+                print(df.iloc[start:end, :])
+                start = end
+                end = start + PAGE_SIZE
+                prompt =  "Would you like to see more raw data? Enter 'yes' or 'not': "
+            else:
+                is_continue = False
+    except:
+        traceback.print_exc(file=sys.stdout)
 
 def main():
     try:
@@ -275,6 +294,7 @@ def main():
                     station_stats(df)
                     trip_duration_stats(df)
                     user_stats(df)
+                    handle_display_raw_data(df)
 
             restart = input('\nWould you like to restart? Enter yes or no.\n')
             if restart.lower() != 'yes':
