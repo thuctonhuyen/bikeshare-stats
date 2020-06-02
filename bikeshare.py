@@ -260,7 +260,7 @@ def handle_display_raw_data(df):
         is_continue = True
         start = 0
         end = PAGE_SIZE
-        prompt = f"Would you like to see {PAGE_SIZE} lines of raw data? Enter 'yes' or 'not': "
+        prompt = f"Would you like to see {PAGE_SIZE} lines of raw data? Enter 'yes' or 'no': "
         while is_continue:
             display_raw_data = input(prompt)
             
