@@ -10,12 +10,14 @@ CITY_DATA = {
     'washington': 'washington.csv'
 }
 VALID_CITY = ['Chicago', 'New York', 'Washington']
-DEBUG = True
+DEBUG = False
 VALIDATORS_MESSAGE = {
     'INVALID_CITY': 'Please enter a valid city name.',
     'INVALID_MONTH': 'Please enter a valid month name.',
     'INVALID_DAY_OF_WEEK': 'Please enter a valid day of week.'
 }
+TRIP_DURATION_ASTYPE = 'timedelta64[m]'
+TRIP_DURATION_TIME_UNIT = 'mins'
 
 def convert_month(month):
     try:
@@ -214,15 +216,15 @@ def trip_duration_stats(df):
 
     if is_column_valid(df, 'Start Time') and is_column_valid(df, 'End Time'):
         df['Total Duration'] = (pd.to_datetime(
-            df['End Time']) - pd.to_datetime(df['Start Time'])).astype('timedelta64[m]')
+            df['End Time']) - pd.to_datetime(df['Start Time'])).astype(TRIP_DURATION_ASTYPE)
 
         # display total travel time
         total_duration = (df['Total Duration'].sum(min_count=0))
-        print('Total Travel Time: ', total_duration, ' mins')
+        print('Total Travel Time: ', total_duration, TRIP_DURATION_TIME_UNIT)
 
         # display mean travel time
         mean_duration = (df['Total Duration'].mean(skipna=True))
-        print('Mean Travel Time: ', mean_duration, ' mins')
+        print('Mean Travel Time: ', mean_duration, TRIP_DURATION_TIME_UNIT)
         print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
