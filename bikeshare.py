@@ -10,6 +10,7 @@ CITY_DATA = {
     'washington': 'washington.csv'
 }
 VALID_CITY = ['Chicago', 'New York', 'Washington']
+# DEBUG can be changed to display error tracestack
 DEBUG = False
 VALIDATORS_MESSAGE = {
     'INVALID_CITY': 'Please enter a valid city name.',
@@ -76,7 +77,6 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-    # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     city = ''
     month = ''
     day = ''
@@ -86,6 +86,7 @@ def get_filters():
 
     while not done:
         if not city:
+            # get user input for city (chicago, new york city, washington).
             city = input(
             "Would you like to see data for Chicago, New York, or Washington? Please enter 'Chicago' or 'New York' or 'Washington': ")
         
