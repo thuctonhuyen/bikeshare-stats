@@ -268,7 +268,7 @@ def handle_display_raw_data(df):
                 print(df.iloc[start:end, :])
                 start = end
                 end = start + PAGE_SIZE
-                prompt =  "Would you like to see more raw data? Enter 'yes' or 'not': "
+                prompt =  "Would you like to see more raw data? Enter 'yes' or 'no': "
             else:
                 is_continue = False
     except:
