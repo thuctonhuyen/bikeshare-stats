@@ -158,7 +158,7 @@ def load_data(city, month, day):
     except:
         if DEBUG:
             traceback.print_exc(file=sys.stdout)
-        return ''
+        return None
 
 
 def time_stats(df):
@@ -267,7 +267,7 @@ def main():
                     print('-'*40)
             if city:
                 df = load_data(city, month, day)
-                if df:
+                if df is not None and not df.empty:
                     time_stats(df)
                     station_stats(df)
                     trip_duration_stats(df)
